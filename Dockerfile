@@ -31,8 +31,7 @@
 
 # We use `unstable` here since we install `wireguard` below
 FROM debian:unstable
-RUN apt update && \
-      DEBIAN_FRONTEND=noninteractive apt install -y \
+RUN apt update && DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recommends \
         dnsutils \
         curl \
         nmap \
@@ -64,4 +63,6 @@ RUN apt update && \
         wireguard \
         tshark \
         netcat-openbsd \
-        miniupnpc
+        miniupnpc \
+        
+        && rm -rf /var/lib/apt/lists/*
